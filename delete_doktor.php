@@ -11,7 +11,6 @@
 <h2>Delete a Record</h2>
 
 <?php
-// Pastikan ID yang sah digunakan melalui GET atau POST
 if ((isset($_GET['id'])) && (is_numeric($_GET['id']))) { 
     $id = $_GET['id'];
 } elseif ((isset($_POST['id'])) && (is_numeric($_POST['id']))) { 
@@ -22,12 +21,12 @@ if ((isset($_GET['id'])) && (is_numeric($_GET['id']))) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if ($_POST['sure'] == 'Yes') { // Hapuskan rekod
+    if ($_POST['sure'] == 'Yes') { // Delete Record
 
         $q = "DELETE FROM doktor WHERE ID=$id LIMIT 1";
         $result = mysqli_query($connect, $q);
 
-        if (mysqli_affected_rows($connect) == 1) { // Jika tiada masalah
+        if (mysqli_affected_rows($connect) == 1) { //If no problem
             echo "<h3>The record has been deleted.</h3>";
         } else {
             echo "<p class='error'>The record could not be deleted.<br>Probably because it does not exist or due to system error.</p>";
@@ -37,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "<h3>The user has NOT been deleted.</h3>";
     }
 } else { 
-    // Dapatkan maklumat ahli semasa
+
     $q = "SELECT FirstName FROM doktor WHERE ID=$id";
     $result = mysqli_query($connect, $q);
 
